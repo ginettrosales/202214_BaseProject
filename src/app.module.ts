@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { AerolineaModule } from './aerolinea/aerolinea.module';
 import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AerolineaEntity } from './aerolinea/aerolinea.entity';
+import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
 
 @Module({
   imports: [AerolineaModule, AeropuertoModule,
@@ -14,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'postgres',
       password: 'postgres',
       database: 'aerolineas',
-      entities: [AerolineaModule, AeropuertoModule],
+      entities: [AerolineaEntity, AeropuertoEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true

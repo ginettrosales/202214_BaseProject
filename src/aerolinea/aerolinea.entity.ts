@@ -13,11 +13,11 @@ export class AerolineaEntity {
     descripcion: string;
  
     @Column()
-    fundacion: Date;
+    fundacion: string;
  
     @Column()
     website: string;
 
     @ManyToMany(() => AeropuertoEntity, aeropuerto => aeropuerto.aerolineas)
-    aeropuertos: AeropuertoEntity
+    aeropuertos: AeropuertoEntity[];
 }
