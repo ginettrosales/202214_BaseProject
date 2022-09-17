@@ -51,7 +51,7 @@ describe('AirlineAirportService', () => {
     })
   }    
 
-  it('servicio debe estar definido', () => {
+  it.only('servicio debe estar definido', () => {
     expect(service).toBeDefined();
   });
 
