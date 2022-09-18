@@ -45,7 +45,7 @@ describe('AirlineAirportService', () => {
     airline = await airlineRepository.save({
       name: faker.lorem.word(2), 
       description: faker.lorem.sentence(), 
-      foundation: faker.lorem.text(), 
+      foundation: faker.date.birthdate({min: 2, max:300}), 
       website: faker.internet.domainName(),
       airports: airportsList
     })
@@ -66,7 +66,7 @@ describe('AirlineAirportService', () => {
     const newAirline: AirlineEntity = await airlineRepository.save({
       name: faker.lorem.word(2), 
       description: faker.lorem.sentence(), 
-      foundation: faker.lorem.text(), 
+      foundation: faker.date.birthdate({min: 2, max:300}), 
       website: faker.internet.domainName()
     })
  

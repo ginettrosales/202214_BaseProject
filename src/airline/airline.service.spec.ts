@@ -29,7 +29,7 @@ describe('AirlineService', () => {
         const airline: AirlineEntity = await repository.save({
         name: faker.lorem.word(2), 
         description: faker.lorem.sentence(), 
-        foundation: faker.lorem.text(), 
+        foundation: faker.date.birthdate({min: 2, max:300}), 
         website: faker.internet.domainName()})
         airlinesList.push(airline);
     }
@@ -64,7 +64,7 @@ describe('AirlineService', () => {
       id: "",
       name: faker.lorem.word(2), 
       description: faker.lorem.sentence(), 
-      foundation: faker.lorem.text(), 
+      foundation: faker.date.birthdate({min: 2, max:300}), 
       website: faker.internet.domainName(),
       airports: []
     }
