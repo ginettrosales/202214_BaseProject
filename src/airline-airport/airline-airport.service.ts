@@ -45,7 +45,7 @@ export class AirlineAirportService {
         if (!airline)
           throw new BusinessLogicException("La aerolínea con el identificador especificado no existe", BusinessError.NOT_FOUND)
     
-        const airlineAirport: AirportEntity = airline.airports.find(e => e.id === airline.id);
+        const airlineAirport: AirportEntity = airline.airports.find(e => e.id === airport.id);
     
         if (!airlineAirport)
           throw new BusinessLogicException("El aeropuerto con el identificador especificado no está asociado a la aerolínea", BusinessError.PRECONDITION_FAILED)

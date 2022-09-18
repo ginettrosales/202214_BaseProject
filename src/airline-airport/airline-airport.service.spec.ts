@@ -51,11 +51,11 @@ describe('AirlineAirportService', () => {
     })
   }    
 
-  it.only('servicio debe estar definido', () => {
+  it('servicio debe estar definido', () => {
     expect(service).toBeDefined();
   });
 
-  it('addAirportToAirline should add an artwork to a museum', async () => {
+  it('addAirportToAirline agrega un aeropuerto a una aerolinea', async () => {
     const newAirport: AirportEntity = await airportRepository.save({
       name: faker.lorem.word(2), 
       code: faker.database.engine(), 
@@ -80,7 +80,7 @@ describe('AirlineAirportService', () => {
     expect(result.airports[0].city).toBe(newAirport.city)
   });
 
-  it('addAirportToAirline should thrown exception for an invalid artwork', async () => {
+  it('addAirportToAirline devuelve execepcion por aeropuerto invalido', async () => {
     const newAirline: AirlineEntity = await airlineRepository.save({
       name: faker.lorem.word(2), 
       description: faker.lorem.sentence(), 
@@ -91,7 +91,7 @@ describe('AirlineAirportService', () => {
     await expect(() => service.addAirportToAirline(newAirline.id, "0")).rejects.toHaveProperty("message", "El aeropuerto con el identificador especificado no existe");
   });
 
-  it('addAirportToAirline should throw an exception for an invalid museum', async () => {
+  it('addAirportToAirline devuelve execepcion por aerolinea invalida', async () => {
     const newAirport: AirportEntity = await airportRepository.save({
       name: faker.lorem.word(2), 
       code: faker.database.engine(), 
@@ -102,18 +102,18 @@ describe('AirlineAirportService', () => {
     await expect(() => service.addAirportToAirline("0", newAirport.id)).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe");
   });
 
-  it('findAirportsFromAirline should return artworks by museum', async ()=>{
+  it('findAirportsFromAirline devuelve los aeropuertos de una aerolinea', async ()=>{
     const airports: AirportEntity[] = await service.findAirportsFromAirline(airline.id);
     expect(airports.length).toBe(5)
   });
 
-  it('findAirportsFromAirline should throw an exception for an invalid museum', async () => {
+  it('findAirportsFromAirline devuelve execepcion por aerolinea invalida', async () => {
     await expect(()=> service.findAirportsFromAirline("0")).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe");
   });
   
-  it('findAirportFromAirline should return artwork by museum', async () => {
+  it('findAirportFromAirline debe retornar un aeropuero por aerolinea', async () => {
     const airport: AirportEntity = airportsList[0];
-    const storedAirport: AirportEntity = await service.findAirportFromAirline(airline.id, airport.id, )
+    const storedAirport: AirportEntity = await service.findAirportFromAirline(airline.id, airport.id,)
     expect(storedAirport).not.toBeNull();
     expect(storedAirport.name).toBe(airport.name);
     expect(storedAirport.code).toBe(airport.code);
@@ -121,16 +121,16 @@ describe('AirlineAirportService', () => {
     expect(storedAirport.city).toBe(airport.city);
   });
 
-  it('findAirportFromAirline should throw an exception for an invalid artwork', async () => {
+  it('findAirportFromAirline devuelve execepcion por aeropuerto invalido', async () => {
     await expect(()=> service.findAirportFromAirline(airline.id, "0")).rejects.toHaveProperty("message", "El aeropuerto con el identificador especificado no existe");
   });
 
-  it('findAirportFromAirline should throw an exception for an invalid museum', async () => {
+  it('findAirportFromAirline devuelve execepcion por aerolinea invalida', async () => {
     const airport: AirportEntity = airportsList[0];
     await expect(()=> service.findAirportFromAirline("0", airport.id)).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe");
   });
 
-  it('findAirportFromAirline should throw an exception for an artwork not associated to the museum', async () => {
+  it('findAirportFromAirline devuelve execepcion por un aeropuerto que no esta asociado a una aerolinea', async () => {
     const newAirport: AirportEntity = await airportRepository.save({
       name: faker.lorem.word(2), 
       code: faker.database.engine(), 
