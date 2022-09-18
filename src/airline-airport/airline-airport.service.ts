@@ -18,11 +18,11 @@ export class AirlineAirportService {
     async addAirportToAirline(airlineId: number, airportId: number): Promise<AirlineEntity> {
         const airport: AirportEntity = await this.airportRepository.findOne({where: {id: airportId}});
         if (!airport)
-          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airport with the given id was not found", BusinessError.NOT_FOUND);
        
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id: airlineId}, relations: ["airports"]}) 
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND);
      
         airline.airports = [...airline.airports, airport];
         return await this.airlineRepository.save(airline);
@@ -31,7 +31,7 @@ export class AirlineAirportService {
     async findAirportsFromAirline(airportId: number): Promise<AirportEntity[]> {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id: airportId}, relations: ["airports"]});
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND)
         
         return airline.airports;
     }
@@ -39,11 +39,11 @@ export class AirlineAirportService {
     async findAirportFromAirline(airlineId: number, airportId: number): Promise<AirportEntity> {
         const airport: AirportEntity = await this.airportRepository.findOne({where: {id: airportId}});
         if (!airport)
-          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airport with the given id was not found", BusinessError.NOT_FOUND)
         
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id: airlineId}, relations: ["airports"]}); 
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND)
     
         const airlineAirport: AirportEntity = airline.airports.find(e => e.id === airport.id);
     
@@ -57,12 +57,12 @@ export class AirlineAirportService {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id: airlineId}, relations: ["airports"]});
     
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND)
     
         for (let i = 0; i < airports.length; i++) {
           const airport: AirportEntity = await this.airportRepository.findOne({where: {id: airports[i].id}});
           if (!airport)
-            throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND)
+            throw new BusinessLogicException("The airport with the given id was not found", BusinessError.NOT_FOUND)
         }
     
         airline.airports = airports;
@@ -72,11 +72,11 @@ export class AirlineAirportService {
     async deleteAirportFromAirline(airlineId: number, airportId: number){
         const airport: AirportEntity = await this.airportRepository.findOne({where: {id: airportId}});
         if (!airport)
-          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airport with the given id was not found", BusinessError.NOT_FOUND)
     
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id: airlineId}, relations: ["airports"]});
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND)
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND)
     
         const airlineAirport: AirportEntity = airline.airports.find(e => e.id === airport.id);
     

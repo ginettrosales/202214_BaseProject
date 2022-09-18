@@ -17,7 +17,7 @@ import { AirlineAirportModule } from './airline-airport/airline-airport.module';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'aerolineas',
+      database: 'postgres',
       entities: [AirlineEntity, AirportEntity],
       dropSchema: true,
       synchronize: true,

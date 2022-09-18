@@ -1,5 +1,4 @@
 import {IsNotEmpty, IsString, Length, MaxLength, MinLength} from 'class-validator';
-import { BadRequestException } from '@nestjs/common';
 
 export class AirportDto {
     @IsString()

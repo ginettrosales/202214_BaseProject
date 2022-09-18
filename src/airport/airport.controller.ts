@@ -6,6 +6,7 @@ import { AirportEntity } from './airport.entity';
 import { AirportService } from './airport.service';
 
 @Controller('airports')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class AirportController {
     constructor(private readonly airportService: AirportService) {}
 

@@ -88,7 +88,7 @@ describe('AirlineAirportService', () => {
       website: faker.internet.domainName()
     })
  
-    await expect(() => service.addAirportToAirline(newAirline.id, 0)).rejects.toHaveProperty("message", "The airport with the specified id is not found");
+    await expect(() => service.addAirportToAirline(newAirline.id, 0)).rejects.toHaveProperty("message", "The airport with the given id was not found");
   });
 
   it('addAirportToAirline devuelve execepcion por aerolinea invalida', async () => {
@@ -99,7 +99,7 @@ describe('AirlineAirportService', () => {
       city: faker.address.city()
     });
  
-    await expect(() => service.addAirportToAirline(0, newAirport.id)).rejects.toHaveProperty("message", "The airline with the specified id is not found");
+    await expect(() => service.addAirportToAirline(0, newAirport.id)).rejects.toHaveProperty("message", "The airline with the given id was not found");
   });
 
   it('findAirportsFromAirline devuelve los aeropuertos de una aerolinea', async ()=>{
@@ -108,7 +108,7 @@ describe('AirlineAirportService', () => {
   });
 
   it('findAirportsFromAirline devuelve execepcion por aerolinea invalida', async () => {
-    await expect(()=> service.findAirportsFromAirline(0)).rejects.toHaveProperty("message", "The airline with the specified id is not found");
+    await expect(()=> service.findAirportsFromAirline(0)).rejects.toHaveProperty("message", "The airline with the given id was not found");
   });
   
   it('findAirportFromAirline debe retornar un aeropuero por aerolinea', async () => {
@@ -122,12 +122,12 @@ describe('AirlineAirportService', () => {
   });
 
   it('findAirportFromAirline devuelve execepcion por aeropuerto invalido', async () => {
-    await expect(()=> service.findAirportFromAirline(airline.id, 0)).rejects.toHaveProperty("message", "The airport with the specified id is not found");
+    await expect(()=> service.findAirportFromAirline(airline.id, 0)).rejects.toHaveProperty("message", "The airport with the given id was not found");
   });
 
   it('findAirportFromAirline devuelve execepcion por aerolinea invalida', async () => {
     const airport: AirportEntity = airportsList[0];
-    await expect(()=> service.findAirportFromAirline(0, airport.id)).rejects.toHaveProperty("message", "The airline with the specified id is not found");
+    await expect(()=> service.findAirportFromAirline(0, airport.id)).rejects.toHaveProperty("message", "The airline with the given id was not found");
   });
 
   it('findAirportFromAirline devuelve execepcion por un aeropuerto que no esta asociado a una aerolinea', async () => {

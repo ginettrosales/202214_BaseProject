@@ -32,7 +32,7 @@ export class AirlineAirportController {
         return await this.airlineAirportService.updateAirportsFromAirline(airlineId, airports);
     }
     
-    @Delete(':airlineId/artworks/:airlineId')
+    @Delete(':airlineId/airports/:airportId')
     @HttpCode(204)
     async deleteAirportFromAirline(@Param('airlineId') airlineId: number, @Param('airportId') airportId: number){
         return await this.airlineAirportService.deleteAirportFromAirline(airlineId, airportId);

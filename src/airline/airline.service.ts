@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
@@ -18,18 +18,20 @@ export class AirlineService {
     async findOne(id: number): Promise<AirlineEntity> {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id}, relations: ["airports"] } );
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND);
    
         return airline;
     }
     async create(airline: AirlineEntity): Promise<AirlineEntity> {
+        console.log(airline)
+        Logger.log(airline)
         return await this.airlineRepository.save(airline);
     }
 
     async update(id: number, airline: AirlineEntity): Promise<AirlineEntity> {
         const persistedAirline: AirlineEntity = await this.airlineRepository.findOne({where:{id}});
         if (!persistedAirline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND);
         
         return await this.airlineRepository.save({...persistedAirline, ...airline});
     }
@@ -37,7 +39,7 @@ export class AirlineService {
     async delete(id: number) {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where:{id}});
         if (!airline)
-          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND);
       
         await this.airlineRepository.remove(airline);
     }    

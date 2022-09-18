@@ -56,7 +56,7 @@ describe('AirlineService', () => {
   });
 
   it('findOne devuelve una execepcion por aerolinea invalida', async () => {
-    await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
+    await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "The airline with the given id was not found")
   });
 
   it('create retorna una nueva aerolinea', async () => {
@@ -97,7 +97,7 @@ describe('AirlineService', () => {
     airline = {
       ...airline, name: "Nuevo nombre", description: "Nueva descripcion"
     }
-    await expect(() => service.update(0, airline)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
+    await expect(() => service.update(0, airline)).rejects.toHaveProperty("message", "The airline with the given id was not found")
   });
 
   it('delete debe eliminar una aerolinea', async () => {
@@ -110,6 +110,6 @@ describe('AirlineService', () => {
   it('delete retorna una excepcion por una aerolinea invalida', async () => {
     const airline: AirlineEntity = airlinesList[0];
     await service.delete(airline.id);
-    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
+    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "The airline with the given id was not found")
   });
 });

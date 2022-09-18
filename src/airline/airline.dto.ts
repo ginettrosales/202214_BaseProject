@@ -1,4 +1,4 @@
-import {IsDateString, IsNotEmpty, IsString, IsUrl, MaxDate} from 'class-validator';
+import {IsDate, IsDateString, IsNotEmpty, IsString, IsUrl, MaxDate, MinDate} from 'class-validator';
 
 export class AirlineDto {
     @IsString()
@@ -11,7 +11,7 @@ export class AirlineDto {
     
     @IsDateString()
     @IsNotEmpty()
-    @MaxDate(new Date())
+    //@MaxDate()
     readonly foundation: Date;
     
     @IsUrl()
