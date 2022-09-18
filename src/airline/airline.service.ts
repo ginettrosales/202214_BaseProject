@@ -15,10 +15,10 @@ export class AirlineService {
         return await this.airlineRepository.find({ relations: ["airports"] });
     }
 
-    async findOne(id: string): Promise<AirlineEntity> {
+    async findOne(id: number): Promise<AirlineEntity> {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where: {id}, relations: ["airports"] } );
         if (!airline)
-          throw new BusinessLogicException("La aerolínea con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
    
         return airline;
     }
@@ -26,18 +26,18 @@ export class AirlineService {
         return await this.airlineRepository.save(airline);
     }
 
-    async update(id: string, airline: AirlineEntity): Promise<AirlineEntity> {
+    async update(id: number, airline: AirlineEntity): Promise<AirlineEntity> {
         const persistedAirline: AirlineEntity = await this.airlineRepository.findOne({where:{id}});
         if (!persistedAirline)
-          throw new BusinessLogicException("La aerolínea con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
         
         return await this.airlineRepository.save({...persistedAirline, ...airline});
     }
 
-    async delete(id: string) {
+    async delete(id: number) {
         const airline: AirlineEntity = await this.airlineRepository.findOne({where:{id}});
         if (!airline)
-          throw new BusinessLogicException("La aerolínea con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airline with the specified id is not found", BusinessError.NOT_FOUND);
       
         await this.airlineRepository.remove(airline);
     }    

@@ -1,10 +1,10 @@
 import { AirlineEntity } from "../airline/airline.entity";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class AirportEntity {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
  
     @Column()
     name: string;

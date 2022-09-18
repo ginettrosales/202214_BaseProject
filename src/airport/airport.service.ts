@@ -15,10 +15,10 @@ export class AirportService {
         return await this.airportRepository.find({ relations: ["airlines"] });
     }
 
-    async findOne(id: string): Promise<AirportEntity> {
+    async findOne(id: number): Promise<AirportEntity> {
         const airport: AirportEntity = await this.airportRepository.findOne({where: {id}, relations: ["airlines"] } );
         if (!airport)
-          throw new BusinessLogicException("El aeropuerto con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND);
    
         return airport;
     }
@@ -26,18 +26,18 @@ export class AirportService {
         return await this.airportRepository.save(airport);
     }
 
-    async update(id: string, airport: AirportEntity): Promise<AirportEntity> {
+    async update(id: number, airport: AirportEntity): Promise<AirportEntity> {
         const persistedAirport: AirportEntity = await this.airportRepository.findOne({where:{id}});
         if (!persistedAirport)
-          throw new BusinessLogicException("El aeropuerto con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND);
         
         return await this.airportRepository.save({...persistedAirport, ...airport});
     }
 
-    async delete(id: string) {
+    async delete(id: number) {
         const airport: AirportEntity = await this.airportRepository.findOne({where:{id}});
         if (!airport)
-          throw new BusinessLogicException("El aeropuerto con el identificador especificado no existe", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The airport with the specified id is not found", BusinessError.NOT_FOUND);
       
         await this.airportRepository.remove(airport);
     }

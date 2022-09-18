@@ -3,8 +3,8 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "t
 
 @Entity()
 export class AirlineEntity {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
  
     @Column()
     name: string;

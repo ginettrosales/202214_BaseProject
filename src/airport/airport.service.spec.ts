@@ -56,12 +56,12 @@ describe('AirportService', () => {
   });
 
   it('findOne devuelve una execepcion por aeropuerto invalido', async () => {
-    await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "El aeropuerto con el identificador especificado no existe")
+    await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "The airport with the specified id is not found")
   });
 
   it('create retorna un nuevo aeropuerto', async () => {
     const airport: AirportEntity = {
-      id: "",
+      id: 1,
       name: faker.lorem.word(2), 
       code: faker.database.engine(), 
       country: faker.address.country(), 
@@ -99,7 +99,7 @@ describe('AirportService', () => {
     airport = {
       ...airport, name: "Nuevo nombre", country: "Nuevo pais"
     }
-    await expect(() => service.update("0", airport)).rejects.toHaveProperty("message", "El aeropuerto con el identificador especificado no existe")
+    await expect(() => service.update(0, airport)).rejects.toHaveProperty("message", "The airport with the specified id is not found")
   });
 
   it('delete elimina un aeropuerto', async () => {
@@ -113,6 +113,6 @@ describe('AirportService', () => {
   it('delete devuelve una execepcion por aeropuerto invalido', async () => {
     const airport: AirportEntity = airportsList[0];
     await service.delete(airport.id);
-    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "El aeropuerto con el identificador especificado no existe")
+    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "The airport with the specified id is not found")
   });
 });

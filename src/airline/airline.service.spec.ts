@@ -56,12 +56,12 @@ describe('AirlineService', () => {
   });
 
   it('findOne devuelve una execepcion por aerolinea invalida', async () => {
-    await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe")
+    await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
   });
 
   it('create retorna una nueva aerolinea', async () => {
     const airline: AirlineEntity = {
-      id: "",
+      id: 1,
       name: faker.lorem.word(2), 
       description: faker.lorem.sentence(), 
       foundation: faker.date.birthdate({min: 2, max:300}), 
@@ -97,7 +97,7 @@ describe('AirlineService', () => {
     airline = {
       ...airline, name: "Nuevo nombre", description: "Nueva descripcion"
     }
-    await expect(() => service.update("0", airline)).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe")
+    await expect(() => service.update(0, airline)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
   });
 
   it('delete debe eliminar una aerolinea', async () => {
@@ -110,6 +110,6 @@ describe('AirlineService', () => {
   it('delete retorna una excepcion por una aerolinea invalida', async () => {
     const airline: AirlineEntity = airlinesList[0];
     await service.delete(airline.id);
-    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "La aerolínea con el identificador especificado no existe")
+    await expect(() => service.delete(0)).rejects.toHaveProperty("message", "The airline with the specified id is not found")
   });
 });
