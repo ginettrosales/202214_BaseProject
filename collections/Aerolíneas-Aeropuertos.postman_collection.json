@@ -221,6 +221,113 @@
 			]
 		},
 		{
+			"name": "Crear un aeropuerto válido 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"airportId_2\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Prueba\",\n    \"code\":\"ABC\",\n    \"country\":\"Pais prueba\",\n    \"city\":\"Ciudad prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{prefix}}/airports",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{prefix}}",
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un aeropuerto válido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Prueba\",\n    \"code\":\"ABC\",\n    \"country\":\"Pais prueba\",\n    \"city\":\"Ciudad prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/{{prefix}}/airports",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{prefix}}",
+								"airports"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "84"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"54-n/8dkXRXvrpFGjT5Np3YfCECnp0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 Sep 2022 18:31:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Prueba\",\n    \"code\": \"ABC\",\n    \"country\": \"Pais prueba\",\n    \"city\": \"Ciudad prueba\",\n    \"id\": 1\n}"
+				}
+			]
+		},
+		{
 			"name": "Asociar un aeropuerto a una aerolínea",
 			"event": [
 				{
@@ -430,6 +537,219 @@
 						{
 							"key": "Date",
 							"value": "Sun, 18 Sep 2022 18:55:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airport with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/{{airportId}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{prefix}}",
+						"airlines",
+						"{{airlineId}}",
+						"airports",
+						"{{airportId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/{{prefix}}/airlines/2/airports/2",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{prefix}}",
+								"airlines",
+								"2",
+								"airports",
+								"2"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 Sep 2022 20:31:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airport with the specified id is not associated to this airline\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/{{airportId_2}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{prefix}}",
+						"airlines",
+						"{{airlineId}}",
+						"airports",
+						"{{airportId_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/0",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{prefix}}",
+								"airlines",
+								"{{airlineId}}",
+								"airports",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-RLtwopeukeJcdNCQI8lVdlt6kCc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 Sep 2022 20:53:12 GMT"
 						},
 						{
 							"key": "Connection",
@@ -685,7 +1005,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/0",
+					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/{{airportId_2}}",
 					"host": [
 						"{{host}}"
 					],
@@ -695,7 +1015,7 @@
 						"airlines",
 						"{{airlineId}}",
 						"airports",
-						"0"
+						"{{airportId_2}}"
 					]
 				}
 			},
@@ -883,7 +1203,7 @@
 							"",
 							"pm.test(\"Get expected error message\", function () {",
 							"   var data = pm.response.json();",
-							"   pm.expect(data.message).to.eql(\"The airline with the given id was not found\");",
+							"   pm.expect(data.message).to.eql(\"The airport with the given id was not found\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -968,219 +1288,6 @@
 						{
 							"key": "Date",
 							"value": "Sun, 18 Sep 2022 20:51:56 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airport with the given id was not found\"\n}"
-				}
-			]
-		},
-		{
-			"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"   pm.response.to.have.status(204);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/{{airportId}}",
-					"host": [
-						"{{host}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"{{prefix}}",
-						"airlines",
-						"{{airlineId}}",
-						"airports",
-						"{{airportId}}"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}:{{port}}/{{prefix}}/airlines/2/airports/2",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{prefix}}",
-								"airlines",
-								"2",
-								"airports",
-								"2"
-							]
-						}
-					},
-					"status": "No Content",
-					"code": 204,
-					"_postman_previewlanguage": "plain",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 18 Sep 2022 20:31:05 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": null
-				}
-			]
-		},
-		{
-			"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"   pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"   var data = pm.response.json();",
-							"   pm.expect(data.message).to.eql(\"The airline with the given id was not found\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/0",
-					"host": [
-						"{{host}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"{{prefix}}",
-						"airlines",
-						"{{airlineId}}",
-						"airports",
-						"0"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}:{{port}}/{{prefix}}/airlines/{{airlineId}}/airports/0",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{prefix}}",
-								"airlines",
-								"{{airlineId}}",
-								"airports",
-								"0"
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "74"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"4a-RLtwopeukeJcdNCQI8lVdlt6kCc\""
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 18 Sep 2022 20:53:12 GMT"
 						},
 						{
 							"key": "Connection",
