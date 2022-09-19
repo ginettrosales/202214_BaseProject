@@ -120,8 +120,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"   pm.response.to.have.status(400);",
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The foundation date must be less than today\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -133,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"Prueba\",\n    \"description\":\"900\",\n    \"foundation\":\"2020/02/24\",\n    \"website\":\"prueba.test\"\n}",
+					"raw": "{\n    \"name\":\"Prueba\",\n    \"description\":\"900\",\n    \"foundation\":\"2022-10-19\",\n    \"website\":\"prueba.test\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -160,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Prueba\",\n    \"description\":\"900\",\n    \"foundation\":\"2020/02/24\",\n    \"website\":\"prueba.test\"\n}",
+							"raw": "{\n    \"name\":\"Prueba\",\n    \"description\":\"900\",\n    \"foundation\":\"2022-10-19\",\n    \"website\":\"prueba.test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,8 +184,8 @@
 							]
 						}
 					},
-					"status": "Bad Request",
-					"code": 400,
+					"status": "Precondition Failed",
+					"code": 412,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -193,15 +198,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "102"
+							"value": "74"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"66-6HxKJ+zSW9U0KGE+kKt5FkSyvds\""
+							"value": "W/\"4a-GLc/xR0DIo82J8Ibpz4Y0o3tm2E\""
 						},
 						{
 							"key": "Date",
-							"value": "Sun, 18 Sep 2022 21:08:14 GMT"
+							"value": "Mon, 19 Sep 2022 04:09:41 GMT"
 						},
 						{
 							"key": "Connection",
@@ -213,7 +218,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"foundation must be a valid ISO 8601 date string\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The foundation date must be less than today\"\n}"
 				}
 			]
 		},

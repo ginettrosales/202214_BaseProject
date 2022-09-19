@@ -23,13 +23,21 @@ export class AirlineService {
         return airline;
     }
     async create(airline: AirlineEntity): Promise<AirlineEntity> {
-        console.log(airline)
-        Logger.log(airline)
+        const date = new Date()
+        let f = new Date(airline.foundation)
+        if (f >= date){
+            throw new BusinessLogicException("The foundation date must be less than today", BusinessError.PRECONDITION_FAILED);
+        }
         return await this.airlineRepository.save(airline);
     }
 
     async update(id: number, airline: AirlineEntity): Promise<AirlineEntity> {
         const persistedAirline: AirlineEntity = await this.airlineRepository.findOne({where:{id}});
+        const date = new Date()
+        let f = new Date(airline.foundation)
+        if (f >= date){
+            throw new BusinessLogicException("The foundation date must be less than today", BusinessError.PRECONDITION_FAILED);
+        }
         if (!persistedAirline)
           throw new BusinessLogicException("The airline with the given id was not found", BusinessError.NOT_FOUND);
         
